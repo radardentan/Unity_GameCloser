@@ -19,7 +19,16 @@ public class YesOrNoDialog : MonoBehaviour
         canvas = transform.root.gameObject.GetComponentInChildren<Canvas>();
         canvas.enabled = false;
         text = canvas.GetComponentInChildren<Text>();
+    
+    }
+    void OnEnable()
+    {
         if (gameObject.name == "No") EventSystem.current.firstSelectedGameObject = gameObject;
+
+    }
+    void OnDisable()
+    {
+        EventSystem.current.firstSelectedGameObject = null;
     }
 
     public static void ShowDialog(string notification, Action submitted, Action canceled)
