@@ -9,7 +9,7 @@ public class MessengerBeforeGameQuit : MonoBehaviour
 
      void Awake()
     {
-        target = transform.root.gameObject.GetComponent<Canvas>();
+        target = transform.root.gameObject.GetComponentInChildren<Canvas>();
         target.enabled = false;
     }
 
@@ -26,7 +26,7 @@ public class MessengerBeforeGameQuit : MonoBehaviour
     }
     public void Canceled() 
     {
-        GetComponentInParent<Canvas>().enabled = false;
+        target.enabled = false;
         ObjectPauser.Resume();
     }
 }
