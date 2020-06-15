@@ -19,10 +19,12 @@ public class YesOrNoDialog : MonoBehaviour
         canvas = transform.root.gameObject.GetComponentInChildren<Canvas>();
         canvas.enabled = false;
         text = canvas.GetComponentInChildren<Text>();
+        if (gameObject.name == "No") EventSystem.current.firstSelectedGameObject = gameObject;
     }
 
     public static void ShowDialog(string notification, Action submitted, Action canceled)
     {
+
         submittedAction = submitted;
         canceledAction = canceled;
         
@@ -33,7 +35,6 @@ public class YesOrNoDialog : MonoBehaviour
     {
         submittedAction = null;
         canceledAction = null;
-
         canvas.enabled = false;
     }
     public static void SetNotification(string notification) 
