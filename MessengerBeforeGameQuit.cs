@@ -5,28 +5,20 @@ using UnityEngine;
 
 public class MessengerBeforeGameQuit : MonoBehaviour
 {
-    static Canvas target;
-
-     void Awake()
-    {
-        target = transform.root.gameObject.GetComponentInChildren<Canvas>();
-        target.enabled = false;
-    }
-
-
+    const string shownText = "本当にゲームを終了しますか?";
     public static void NotifyBeforeGameQuit() 
     {
         ObjectPauser.Pause();
-        target.enabled = true;
+        YesOrNoDialog.ShowDialog(shownText, QuitGame, Canceled);
     }
-    public void QuitGame() 
+    public static void QuitGame() 
     {
         if (Application.isEditor) EditorApplication.isPlaying = false;
         else Application.Quit();
     }
-    public void Canceled() 
+    public static void Canceled() 
     {
-        target.enabled = false;
+        YesOrNoDialog.HideDialog();
         ObjectPauser.Resume();
     }
 }
